@@ -1,4 +1,4 @@
-https://mqjogos.github.io/Cruzadinhas/AO/app.html 
+https://trecgosgame.github.io/Cruzadinhas/AO/app.html 
 
 
 
