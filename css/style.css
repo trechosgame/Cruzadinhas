@@ -1,71 +1,114 @@
-body {
-      margin:0;
-      padding:0;
-      background: url("bg.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family:Helvetica ,Sans-Serif;
-      text-align:center;
-      
-}
-#container
-{
-  width:810px;
-  height:650px;
-  margin: 0px auto;
-}
-#hint
-{
-  width: 200px;
-  height: 550px;
-  float:left;
-  text-align:center;
-  font-size: 30px;
-  background: #fff;
-  border-radius:1px solid black;
-  display: none;
-  
-}
-#letters
-{
-  width:580px;
-  height:580px;    
-  float:right;
-}
-.individual
-{
-  background: #fff;
-  width:40px;
-  height:40px;
-  line-height:40px;
-  float:left;
-  border-radius:2px;
-  font-size:25px;
-  text-align:center;
-  margin:3px;
-}
-.done
-{
-  text-decoration: line-through;
-}
-.colorPurple
-{
-  background: purple;
-}
-.correctlySelected
-{
-  background: silver;
-}
-#message
-{
-  color:red;
+body { 
+  margin: 0; 
+  padding: 20px; 
+  font-family: Arial, sans-serif; 
+  background: linear-gradient(to bottom, #87CEEB, #98FB98); 
+  text-align: center; 
 }
 
+#container { 
+  max-width: 95vw; 
+  margin: auto; 
+}
 
+#hint { 
+  background: rgba(255,255,255,0.95); 
+  padding: 15px; 
+  border-radius: 20px; 
+  margin: 20px auto; 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+}
 
+#hint h2 { 
+  color: #4CAF50; 
+  margin: 0 0 15px 0; 
+  font-size: 7vw; 
+}
 
+#hint p { 
+  margin: 8px 0; 
+  font-size: 5.5vw; 
+  font-weight: bold; 
+  color: #333; 
+}
 
+#hint p.done { 
+  text-decoration: line-through; 
+  color: #4CAF50; 
+  text-shadow: 0 0 10px lime; 
+  animation: glow 1s infinite alternate; 
+}
 
+@keyframes glow { 
+  0% { text-shadow: 0 0 10px lime; } 
+  100% { text-shadow: 0 0 20px #90EE90; } 
+}
 
+#letters { 
+  display: grid; 
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 3px; 
+  width: 95vw; 
+  aspect-ratio: 1; 
+  margin: 20px auto; 
+}
+
+.individual { 
+  background: rgba(255,255,255,0.9); 
+  border: 2px solid #666; 
+  border-radius: 10px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 7vw; 
+  font-weight: bold; 
+  color: #333; 
+  user-select: none; 
+  touch-action: manipulation; 
+  cursor: pointer; 
+  transition: all 0.2s;
+}
+
+.individual:hover { 
+  transform: scale(1.05); 
+}
+
+.colorPurple { 
+  background: linear-gradient(45deg, #DDA0DD, #E6E6FA) !important; 
+}
+
+.correctlySelected { 
+  background: linear-gradient(45deg, #90EE90, #98FB98) !important; 
+  animation: celebrate 0.6s ease-in-out; 
+  border-color: lime !important;
+}
+
+@keyframes celebrate { 
+  0%, 100% { transform: scale(1); } 
+  50% { transform: scale(1.15); } 
+}
+
+#phaseComplete { 
+  position: fixed; 
+  top: 0; left: 0; 
+  width: 100%; height: 100%; 
+  background: rgba(76,175,80,0.95); 
+  display: none; 
+  align-items: center; 
+  justify-content: center; 
+  flex-direction: column; 
+  color: white; 
+  font-size: 8vw; 
+  z-index: 999;
+}
+
+#nextPhaseBtn { 
+  padding: 20px 40px; 
+  font-size: 6vw; 
+  background: white; 
+  color: #4CAF50; 
+  border: none; 
+  border-radius: 20px; 
+  margin-top: 20px; 
+  cursor: pointer; 
+}
