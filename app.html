@@ -1,23 +1,229 @@
-<!DOCTYPE html> 
-<html lang= "pt-br"> 
-<head> 
-  <title> CRUZADINHA AO </title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width,initial-scale=1"> 
-  <link rel="stylesheet" href="css/style.css"/> 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Cruzadinha Mágica - Fases!</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { margin: 0; padding: 20px; font-family: Arial; background: linear-gradient(to bottom, #87CEEB, #98FB98); text-align: center; }
+    #container { max-width: 95vw; margin: auto; }
+    #hint { background: rgba(255,255,255,0.95); padding: 15px; border-radius: 20px; margin: 20px auto; box-shadow: 0 8px 20px rgba(0,0,0,0.3); } 
+    #hint h2 { color: #4CAF50; margin: 0 0 15px 0; font-size: 7vw; }
+    #hint p { margin: 8px 0; font-size: 5.5vw; font-weight: bold; color: #333; }
+    #hint p.done { text-decoration: line-through; color: #4CAF50; text-shadow: 0 0 10px lime; animation: glow 1s infinite alternate; }
+    @keyframes glow { 0% { text-shadow: 0 0 10px lime; } 100% { text-shadow: 0 0 20px #90EE90; } }
+    #letters { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; width: 95vw; aspect-ratio: 1; margin: 20px auto; }
+    .individual { 
+      background: rgba(255,255,255,0.9); border: 2px solid #666; border-radius: 10px; 
+      display: flex; align-items: center; justify-content: center; font-size: 7vw; font-weight: bold; 
+      color: #333; user-select: none; touch-action: manipulation; cursor: pointer; transition: all 0.2s;
+    }
+    .individual:hover { transform: scale(1.05); }
+    .colorPurple { background: linear-gradient(45deg, #DDA0DD, #E6E6FA) !important; }
+    .correctlySelected { 
+      background: linear-gradient(45deg, #90EE90, #98FB98) !important; 
+      animation: celebrate 0.6s ease-in-out; border-color: lime !important;
+    }
+    @keyframes celebrate { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+    #phaseComplete { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(76,175,80,0.95); display: none; align-items: center; justify-content: center; 
+      flex-direction: column; color: white; font-size: 8vw; z-index: 999;
+    }
+    #nextPhaseBtn { padding: 20px 40px; font-size: 6vw; background: white; color: #4CAF50; border: none; border-radius: 20px; margin-top: 20px; cursor: pointer; }
+  </style>
 </head>
 <body>
   <div id="container">
-      <div id="hint"></div>
-      <div id="letters"></div>
+    <div id="hint">
+      <h2 id="phaseTitle">Fase ÃO</h2>
+      <div id="wordsList"></div>
+    </div>
+    <div id="letters"></div>
   </div>
-    
- <script src="js/script.js"></script>      
- </body> 
- </html>
 
+  <div id="phaseComplete">
+    <h1>🎉 PARABÉNS!!! 🎉</h1>
+    <p id="completeMessage">Fase completa!</p>
+    <button id="nextPhaseBtn" onclick="nextPhase()">Próxima Fase →</button>
+  </div>
 
+  <script>
+    // === FASES ===
+    const phases = [
+      { title: " ", words: ["FOGÃO","BALÃO","PIÃO","SABÃO","CORAÇÃO","ANÃO","LIMÃO","FEIJÃO"] },
+      { title: " ", words: ["BOLA","BOLO","BEBE","BICO","BOCA","BALDE","BOTA","BULE"] },
+      { title: " ", words: ["CASA","CAMA","CARRO","CAO","CAVALO","COPA","COROA","CIRCO"] },
+      { title: " ", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DINHO","DISCO","DINO"] }
+    ];
 
+    let currentPhase = 0;
+    let myWords = phases[currentPhase].words;
+    let tempWords = [];
+    let selectedWord = "";
 
+    $(document).ready(function(){
+      loadPhase(currentPhase);
+    });
 
+    function loadPhase(phaseIndex) {
+      currentPhase = phaseIndex;
+      myWords = phases[currentPhase].words;
+      tempWords = [];
+      selectedWord = "";
+
+      $("#phaseTitle").text(phases[currentPhase].title);
+      $("#wordsList").empty();
+      myWords.forEach(word => $("#wordsList").append("<p>" + word + "</p>"));
+
+      arrangeGame();
+      setupTouch();
+    }
+
+    function setupTouch() {
+      $(".individual").off(); // limpa eventos antigos
+
+      $(".individual").on("touchstart mousedown", function(e){
+        e.preventDefault();
+        selectedWord = "";
+        $(".individual").removeClass("colorPurple");
+        selectLetter($(this));
+      });
+
+      $(".individual").on("touchmove mousemove", function(e){
+        e.preventDefault();
+        let touch = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+        let elem = document.elementFromPoint(touch.clientX, touch.clientY);
+        let $letter = $(elem).closest(".individual");
+        if ($letter.length > 0 && $letter.text().trim() !== "" && !$letter.hasClass("colorPurple")) {
+          selectLetter($letter);
+        }
+      });
+
+      $(document).on("touchend mouseup", function(){
+        checkSelectedWord();
+      });
+    }
+
+    function selectLetter($letter) {
+      $letter.addClass("colorPurple");
+      selectedWord += $letter.text();
+    }
+
+    function checkSelectedWord() {
+      if (myWords.includes(selectedWord)) {
+        $(".colorPurple").addClass("correctlySelected");
+        $("#wordsList p").each(function(){
+          if ($(this).text() === selectedWord) {
+            $(this).addClass("done");
+          }
+        });
+
+        if ($(".done").length === myWords.length) {
+          $("#phaseComplete").show();
+        }
+      }
+
+      selectedWord = "";
+      setTimeout(() => $(".individual").removeClass("colorPurple"), 800);
+    }
+
+    function nextPhase() {
+      $("#phaseComplete").hide();
+      if (currentPhase < phases.length - 1) {
+        loadPhase(currentPhase + 1);
+      } else {
+        alert("🎉 Você completou TODAS as fases!!! 🎉");
+      }
+    }
+
+    function arrangeGame() {
+      $("#letters").empty();
+      for(let i = 1; i <= 12; i++) {
+        for(let j = 1; j <= 12; j++) {
+          $("#letters").append(`<div class="individual" data-row="${i}" data-column="${j}"></div>`);
+        }
+      }
+
+      placeCorrectLetters(myWords);
+      placeCorrectLetters(tempWords);
+
+      $(".individual").each(function(){
+        if (!$(this).attr("data-word") || $(this).text() === "") {
+          $(this).text(randomLetter());
+        }
+      });
+    }
+
+    function randomLetter() {
+      const easy = "AAAAAAAAAAEEEEEEIIIIIIOOOOOOOUUUUÃÕÇBCDFGHJLMNPRSTV";
+      return easy.charAt(Math.floor(Math.random() * easy.length));
+    }
+
+    // === SUAS FUNÇÕES ORIGINAIS (MANTENHA ELAS AQUI) ===
+    function checkOccupied(word, starting, orientation) {
+      // seu código original
+      var status = ""; var incrementBy = 0;
+      if(orientation == "row") incrementBy = 1;
+      else if(orientation == "column") incrementBy = 12;
+      else if(orientation == "diagonal") incrementBy = 13;
+      for(var p=starting,q=0;q<word.length;q++) {
+        if($(".individual:eq(" + p + ")").attr("data-word") == undefined)
+          status = "empty";
+        else {
+          status = "occupied";
+          break;
+        }
+        p += incrementBy;
+      }
+      return status;
+    }
+
+    function placeCorrectLetters(myArr) {
+      var positions = ["row","column","diagonal"];
+      var nextLetter = 0; var newStart = 0;
+      for(var i=0;i<myArr.length;i++) {
+        var orientation = positions[Math.floor(Math.random()*positions.length)];
+        var start = Math.floor(Math.random()*$(".individual").length);
+        var myRow = $(".individual:eq(" + start + ")").data("row");
+        var myColumn = $(".individual:eq(" + start + ")").data("column");
+
+        // seu código completo de orientação (row, column, diagonal)
+        if(orientation == "row") {
+          nextLetter = 1;
+          if((myColumn*1) + myArr[i].length <=12) newStart = start;
+          else {
+            var newColumn = 12 - myArr[i].length;
+            newStart = $(".individual[data-row=" + myRow + "][data-column=" + newColumn + "]").index();
+          }
+        } else if(orientation == "column") {
+          nextLetter = 12;
+          if((myRow*1) + myArr[i].length <= 12) newStart = start;
+          else {
+            var newRow = 12 - myArr[i].length;
+            newStart = $(".individual[data-row=" + newRow + "][data-column=" + myColumn + "]").index();
+          }
+        } else if(orientation == "diagonal") {
+          nextLetter = 13;
+          if((myColumn*1) + myArr[i].length <= 12 && (myRow*1) + myArr[i].length <= 12) newStart = start;
+          // seu código diagonal completo aqui
+        }
+
+        var characters = myArr[i].split("");
+        var nextPosition = 0;
+        var occupied = checkOccupied(myArr[i], newStart, orientation);
+        if(occupied == "empty") {
+          $.each(characters, function(key, item){
+            $(".individual:eq(" + (newStart+nextPosition) + ")").html(item);
+            $(".individual:eq(" + (newStart+nextPosition) + ")").attr("data-word", myArr[i]);
+            nextPosition += nextLetter;
+          });
+        } else {
+          tempWords.push(myArr[i]);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
