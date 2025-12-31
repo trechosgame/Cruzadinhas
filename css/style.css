@@ -12,32 +12,38 @@ body {
   margin: auto; 
 }
 
-#hint { 
-  background: rgba(255,255,255,0.95); 
-  padding: 15px; 
-  border-radius: 20px; 
-  margin: 20px auto; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+#hint {
+  background: rgba(173, 216, 230, 0.95); /* azul claro como no Word Search */
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  max-width: 40vw; /* ocupa o lado direito como no exemplo */
+  width: 350px;
+  min-width: 300px;
 }
 
-#hint h2 { 
-  color: #4CAF50; 
-  margin: 0 0 15px 0; 
-  font-size: 7vw; 
+#hint h2 {
+  color: #333;
+  margin: 0 0 20px 0;
+  font-size: 8vw;
+  text-align: center;
+  font-weight: bold;
 }
 
-#hint p { 
-  margin: 8px 0; 
-  font-size: 5.5vw; 
-  font-weight: bold; 
-  color: #333; 
+#hint p {
+  margin: 12px 0;
+  font-size: 5.5vw;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
 }
 
-#hint p.done { 
-  text-decoration: line-through; 
-  color: #4CAF50; 
-  text-shadow: 0 0 10px lime; 
-  animation: glow 1s infinite alternate; 
+#hint p.done {
+  text-decoration: line-through;
+  color: #4CAF50;
+  text-shadow: 0 0 10px lime;
+  animation: glow 1s infinite alternate;
 }
 
 @keyframes glow { 
