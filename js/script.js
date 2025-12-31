@@ -28,7 +28,6 @@ function loadPhase(phaseIndex) {
   arrangeGame();
   setupTouch();
 }
-
 function setupTouch() {
   $(".individual").off();
 
@@ -102,6 +101,13 @@ function arrangeGame() {
       $(this).text(randomLetter());
     }
   });
+
+  // Botão Próxima Fase com evento jQuery (mais confiável no mobile)
+$("#nextPhaseBtn").on("click touchend", function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  nextPhase();
+});
 }
 
 function randomLetter() {
