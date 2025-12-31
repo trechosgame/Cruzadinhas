@@ -2,14 +2,22 @@ https://trechosgame.github.io/Cruzadinhas/app.html
 
 
 
-# Cruzadinha-AO
-FOGÃO
-BALÃO
-PIÃO
-SABÃO
+# Latra A
+ABELHA
+AVIÃO
+AVE
+ANÃO
 CORAÇÃO
 ANÃO
-LIMÃO
-FEIJÃO
-LEÃO
-VIOLÃO
+ANEL
+AMEIXA
+ARCO
+ÁRVORE
+ARMÁRIO
+ABACATE
+ABACAXI
+APITO
+ASFALTO
+ARGOLA
+
+
