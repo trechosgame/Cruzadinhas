@@ -102,12 +102,7 @@ function arrangeGame() {
     }
   });
 
-  // Botão Próxima Fase com evento jQuery (mais confiável no mobile)
-$("#nextPhaseBtn").on("click touchend", function(e){
-  e.preventDefault();
-  e.stopPropagation();
-  nextPhase();
-});
+  
 }
 
 function randomLetter() {
