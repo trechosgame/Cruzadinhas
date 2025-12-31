@@ -78,13 +78,16 @@ function checkSelectedWord() {
 
 function nextPhase() {
   $("#phaseComplete").hide();
-  if (currentPhase < phases.length - 1) {
-    loadPhase(currentPhase + 1);
+  currentPhase++; // ← INCREMENTA A FASE AQUI!!!
+
+  if (currentPhase < phases.length) {
+    loadPhase(currentPhase);
   } else {
-    alert("🎉 Você completou TODAS as fases!!! 🎉");
+    alert("🎉 PARABÉNS!!! Você completou TODAS as fases!!! 🎉");
+    // Opcional: volta pra fase 0
+    currentPhase = 0;
   }
 }
-
 function arrangeGame() {
   $("#letters").empty();
   for(let i = 1; i <= 12; i++) {
