@@ -88,6 +88,7 @@ function nextPhase() {
     currentPhase = 0;
   }
 }
+
 function arrangeGame() {
   $("#letters").empty();
   for(let i = 1; i <= 12; i++) {
