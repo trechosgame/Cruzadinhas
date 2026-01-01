@@ -21,10 +21,23 @@ body {
   order: 1; /* grade primeiro no mobile */
   width: 95vw;
   max-width: 600px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  aspect-ratio: 1;
+  margin: 20px auto;
 }
 
 #hint {
   order: 2; /* lista depois no mobile */
+  background: rgba(173, 216, 230, 0.95);
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  max-width: 40vw;
+  width: 350px;
+  min-width: 300px;
 }
 
 @media (min-width: 768px) {
@@ -32,16 +45,6 @@ body {
   #hint { order: 1; width: 35vw; max-width: 400px; }
 }
 
-#hint {
-  background: rgba(173, 216, 230, 0.95); /* azul claro como no Word Search */
-  padding: 20px;
-  border-radius: 20px;
-  margin: 20px auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  max-width: 40vw; /* ocupa o lado direito como no exemplo */
-  width: 350px;
-  min-width: 300px;
-}
 
 #hint h2 {
   color: #333;
@@ -64,6 +67,18 @@ body {
   color: #4CAF50;
   text-shadow: 0 0 10px lime;
   animation: glow 1s infinite alternate;
+}
+media (min-width: 768px) {
+  #letters { 
+    order: 2; 
+    width: 60vw; 
+    max-width: 600px; 
+  }
+  #hint { 
+    order: 1; 
+    width: 35vw; 
+    max-width: 400px; 
+  }
 }
 
 @keyframes glow { 
