@@ -1,45 +1,21 @@
 body { 
   margin: 0; 
-  padding: 0; 
-  font-family: 'Arial', sans-serif; 
+  padding: 0;
+  font-family: 'Arial', sans-serif;
   background: url('bg.jpg') no-repeat center center fixed;
   background-size: cover;
   touch-action: manipulation;
 }
 
-#container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 95vw;
-  margin: 20px auto;
-}
-
-/* GRADE DE LETRAS */
-#letters {
-  order: 1; /* primeiro no mobile */
-  width: 95vw;
-  max-width: 600px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 3px;
-  aspect-ratio: 1 / 1;
-  margin: 20px auto;
-}
-
-/* PAINEL DE PALAVRAS */
+/* Painel de palavras (em cima) */
 #hint {
-  order: 2; /* depois no mobile */
   background: rgba(173, 216, 230, 0.95);
   padding: 20px;
   border-radius: 20px;
-  margin: 20px auto;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  max-width: 40vw;
-  width: 350px;
-  min-width: 300px;
+  width: 90vw;
+  max-width: 500px;
+  margin: 20px auto;
 }
 
 #hint h2 {
@@ -68,6 +44,17 @@ body {
 @keyframes glow {
   0% { text-shadow: 0 0 10px lime; }
   100% { text-shadow: 0 0 20px #90EE90; }
+}
+
+/* Grade de letras (embaixo) */
+#letters {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  width: 95vw;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  margin: 20px auto;
 }
 
 .individual {
@@ -128,21 +115,4 @@ body {
   border-radius: 20px;
   margin-top: 20px;
   cursor: pointer;
-}
-
-/* RESPONSIVO: lado a lado no tablet/PC */
-@media (min-width: 768px) {
-  #container {
-    justify-content: space-around;
-  }
-  #letters {
-    order: 2;
-    width: 60vw;
-    max-width: 600px;
-  }
-  #hint {
-    order: 1;
-    width: 35vw;
-    max-width: 400px;
-  }
 }
