@@ -17,19 +17,21 @@ body {
   margin: 20px auto;
 }
 
+/* GRADE DE LETRAS */
 #letters {
-  order: 1; /* grade primeiro no mobile */
+  order: 1; /* primeiro no mobile */
   width: 95vw;
   max-width: 600px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 3px;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   margin: 20px auto;
 }
 
+/* PAINEL DE PALAVRAS */
 #hint {
-  order: 2; /* lista depois no mobile */
+  order: 2; /* depois no mobile */
   background: rgba(173, 216, 230, 0.95);
   padding: 20px;
   border-radius: 20px;
@@ -130,6 +132,9 @@ body {
 
 /* RESPONSIVO: lado a lado no tablet/PC */
 @media (min-width: 768px) {
+  #container {
+    justify-content: space-around;
+  }
   #letters {
     order: 2;
     width: 60vw;
