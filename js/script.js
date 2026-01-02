@@ -3,7 +3,7 @@ const phases = [
   { title: "Fase ÃO", words: ["FOGÃO","BALÃO","PIÃO","SABÃO","CORAÇÃO","ANÃO","LIMÃO","FEIJÃO"] },
   { title: "Fase B", words: ["BOLA","BOLO","BEBE","BICO","BOCA","BALDE","BOTA","BULE"] },
   { title: "Fase C", words: ["CASA","CAMA","CARRO","CAO","CAVALO","COPA","COROA","CIRCO"] },
-  { title: "Fase D", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DINHO","DISCO","DINO"] }
+  { title: "Fase D", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DIA","DISCO","DINO"] }
 ];
 
 let currentPhase = 0;
@@ -174,4 +174,10 @@ function placeCorrectLetters(myArr) {
       tempWords.push(myArr[i]);
     }
   }
+  // === EVENTO DO BOTÃO PRÓXIMA FASE (mais confiável no mobile) ===
+   $(document).on("click touchend", "#nextPhaseBtn", function(e){
+   e.preventDefault();
+   e.stopPropagation();
+   nextPhase();
+   });
 }
