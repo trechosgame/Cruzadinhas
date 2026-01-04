@@ -1,9 +1,11 @@
 // === FASES ===
 const phases = [
-  { title: "Letra A", words: ["ABELHA","AVE","AVESTRUZ","AQUÁRIO","AMEIXA","ANÃO","AVIÃO","AMIGO"] },
+  { title: "Letra A", words: ["ABELHA","ANEL","AVESTRUZ","AQUÁRIO","AMEIXA","ANÃO","AVIÃO","AMIGO"] },
   { title: "Letra B", words: ["BOLACHA","BALÃO","BARCO","BICO","BOCA","BALDE","BOTA","BULE"] },
   { title: "Letra C", words: ["CASA","CAMA","CARRO","CACHORRO","CAVALO","COPA","COROA","CIRCO"] },
-  { title: "Letra D", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DINOSSAURO","DISCO","DINO"] }
+  { title: "Letra D", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DINOSSAURO","DISCO","DINO"] },
+  { title: "Letra E", words: ["ELEFANTE","ESCOLA","ESPIGA","ERVILHA","EGITO","EMA","ESTRELA","ESPADA"] },
+  { title: "Letra F", words: ["FADA","FAROL","FEIJÃO","FARINHA","FERRO","FÍGADO","FESTA","FIVELA"] }
 ];
 
 let currentPhase = 0;
