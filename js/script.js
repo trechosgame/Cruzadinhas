@@ -17,6 +17,17 @@ $(document).ready(function(){
   loadPhase(currentPhase);
 });
 
+$(document).ready(function(){
+  loadPhase(currentPhase);
+
+  // === BOTÃO PRÓXIMA LETRA (CORRETO AQUI - UMA ÚNICA VEZ!) ===
+  $(document).on("click touchend", "#nextPhaseBtn", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    nextPhase();
+  });
+});
+
 function loadPhase(phaseIndex) {
   currentPhase = phaseIndex;
   myWords = phases[currentPhase].words;
@@ -176,10 +187,5 @@ function placeCorrectLetters(myArr) {
       tempWords.push(myArr[i]);
     }
   }
-  // === EVENTO DO BOTÃO PRÓXIMA FASE (mais confiável no mobile) ===
-   $(document).on("click touchend", "#nextPhaseBtn", function(e){
-   e.preventDefault();
-   e.stopPropagation();
-   nextPhase();
-   });
+  
 }
