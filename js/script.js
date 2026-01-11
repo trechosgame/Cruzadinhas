@@ -15,12 +15,8 @@ let selectedWord = "";
 
 $(document).ready(function(){
   loadPhase(currentPhase);
-});
 
-$(document).ready(function(){
-  loadPhase(currentPhase);
-
-  // === BOTÃO PRÓXIMA LETRA (CORRETO AQUI - UMA ÚNICA VEZ!) ===
+  // === EVENTO DO BOTÃO PRÓXIMA LETRA (só aqui, uma vez só!) ===
   $(document).on("click touchend", "#nextPhaseBtn", function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -72,6 +68,10 @@ function selectLetter($letter) {
 }
 
 function checkSelectedWord() {
+  if ($(".done").length === myWords.length) {
+  launchConfetti(); // <- Confete explode aqui em TODAS as fases!
+  $("#phaseComplete").show();
+   }
   if (myWords.includes(selectedWord)) {
     $(".colorPurple").addClass("correctlySelected");
     $("#wordsList p").each(function(){
@@ -81,6 +81,7 @@ function checkSelectedWord() {
     });
 
     if ($(".done").length === myWords.length) {
+      launchConfetti(); // <- CONFETE EXPLODE AQUI !!!
       $("#phaseComplete").show();
     }
   }
@@ -188,4 +189,31 @@ function placeCorrectLetters(myArr) {
     }
   }
   
+}
+ // === CONFETE NA VITÓRIA ===
+function launchConfetti() {
+  document.getElementById('victorySound')?.play(); // opcional - som de vitória
+  const duration = 3 * 1000; // 3 segundos de confete
+  const end = Date.now() + duration;
+  (function frame() {
+    confetti({
+      particleCount: 8,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+    });
+
+    confetti({
+      particleCount: 8,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
 }
