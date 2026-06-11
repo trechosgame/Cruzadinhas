@@ -1,11 +1,11 @@
 // === FASES ===
 const phases = [
-  { title: "Letra A", words: ["ABELHA","ANEL","AVESTRUZ","AQUÁRIO","AMEIXA","ANÃO","AVIÃO","AMIGO"] },
-  { title: "Letra B", words: ["BOLACHA","BALÃO","BARCO","BICO","BOCA","BALDE","BOTA","BULE"] },
-  { title: "Letra C", words: ["CASA","CAMA","CARRO","CACHORRO","CAVALO","COPA","COROA","CIRCO"] },
-  { title: "Letra D", words: ["DADO","DENTE","DEDO","DOCE","DAMA","DINOSSAURO","DISCO","DINO"] },
-  { title: "Letra E", words: ["ELEFANTE","ESCOLA","ESPIGA","ERVILHA","EGITO","EMA","ESTRELA","ESPADA"] },
-  { title: "Letra F", words: ["FADA","FAROL","FEIJÃO","FARINHA","FERRO","FÍGADO","FESTA","FIVELA"] }
+  { title: "FASE 1", words: ["ABACATE","ABACAXI","AIPO","AÇÚCAR","ÁGUA","ALECRIM","ALFACE","ALGODÃO"] },
+  { title: "FASE 2", words: ["ALHO","AMACIANTE","AMENDOIM","AMEIXA","ANEL","ARROZ","ASPIRADOR","ASPIRINA"] },
+  { title: "FASE 3", words: ["ATUM","AVEIA","AVELÃ","AZEITE","AZEITONA","BACON","BALA","BALDE"] },
+  { title: "FASE 4", words: ["BANANA","BANHA","BATEDEIRA","BATATA","BEBIDA","BERINJELA","BETERRABA","BIFE"] },
+  { title: "FASE 5", words: ["BISCOITO","BOLACHA","BOLO","BOMBRIL","BORRACHA","BRIGADEIRO","BRÓCOLIS","CADERNO"] },
+  { title: "FASE 6", words: ["CAFÉ","CALDO","CANETA","CANJICA","CANUDO","CARAMBOLA","CARNE","CASTANHA"] }
 ];
 
 let currentPhase = 0;
